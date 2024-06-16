@@ -1,22 +1,29 @@
-mkdir a1 #Question 1
-~ #Question 2
-id #Question 3
-ls /proc/ | grep me* #Question 4
-ls /proc/ | grep cp* #Question 4
-head /proc/meminfo #Question 5
-head /proc/cpuinfo #Question 6
-cat /proc/cpuinfo #Question 6
-tail /proc/cpuinfo #Question 6
-tail /proc/cpuinfohead /proc/meminfo #Question 6
-cd
-/etc
-cd /etc
-ls
-grep operating*
-ls /etc | grep os* #Question 7
-ls /etc | cat os-release
+#Question 1
+mkdir a1 
 
+#Question 2
+~ 
 
+#Question 3
+id 
+
+#Question 4
+ls /proc/ | grep me* 
+ls /proc/ | grep cp* 
+
+#Question 5
+head /proc/meminfo 
+
+#Question 6
+head /proc/cpuinfo 
+cat /proc/cpuinfo 
+tail /proc/cpuinfo 
+
+#Question 7
+ls /etc | grep os*
+ls /etc | grep os-release
+
+#Question 8
 cp /datasets/taxidata.tar.gz .
 ls
 tar
