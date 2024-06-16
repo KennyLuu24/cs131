@@ -44,4 +44,3 @@ MMU             : Hash
 
 Question #7
 os-release
-
