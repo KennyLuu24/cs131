@@ -22,3 +22,25 @@ tail /proc/cpuinfo
 #Question 7
 ls /etc | grep os*
 ls /etc | grep os-release
+
+#Question 8
+cp /datasets/taxidata.tar.gz .
+tar -xvzf taxidata.tar.gz
+cd taxidata
+'2019-05-12' 2019-05.csv > may_12.csv
+awk -F, '{sum += $17; count++} END {if (count > 0) print sum/count; else print "No data"}' may_12.csv
+
+#Question 9
+cp /datasets/taxidata.tar.gz .
+tar -xvzf taxidata.tar.gz
+cd taxidata
+'2019-05-12' 2019-05.csv > may_12.csv
+awk -F, 'NR > 1 {if ($17 > max) max=$17} END {print max}' may_12.csv
+
+#Question 10
+cp /datasets/taxidata.tar.gz .
+tar -xvzf taxidata.tar.gz
+cd taxidata
+awk -F, '$4 >= 3 {print $9}' 2019-05.csv > may_2019_dropoff.txt
+sort may_2019_dropoff.txt | uniq -c | sort -nr > sorted_dropoff.txt
+head -n 10 sorted_dropoff.txt
