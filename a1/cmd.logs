@@ -1,0 +1,24 @@
+#Question 1
+mkdir a1 
+
+#Question 2
+~ 
+
+#Question 3
+id 
+
+#Question 4
+ls /proc/ | grep me* 
+ls /proc/ | grep cp* 
+
+#Question 5
+head /proc/meminfo 
+
+#Question 6
+head /proc/cpuinfo 
+cat /proc/cpuinfo 
+tail /proc/cpuinfo 
+
+#Question 7
+ls /etc | grep os*
+ls /etc | grep os-release
