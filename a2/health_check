@@ -1,0 +1,43 @@
+#!/bin/bash
+
+echo "	
+---------------------------------------------------------------------
+	PC/Laptop Health Check for $(whoami) 
+	Conducted at $(date)
+
+---------------------------------------------------------------------"
+
+echo "SYSTEM UPTIME: 
+$(uptime)
+
+---------------------------------------------------------------------"
+
+MemTotal=$(free -h | grep Mem| cut -c 15-20)
+MemFree=$(free -h | grep Mem| cut -c 27-32)
+MemUsed=$(free -h | grep Mem| cut -c 39-46)
+echo "MEMORY USAGE:
+
+Total Memory:		|$MemTotal
+Avilaible Memory:	|$MemFree
+Memory Used:		|$MemUsed
+
+---------------------------------------------------------------------"
+
+SwapTotal=$(free -h | grep Swap| cut -c 15-20)
+SwapFree=$(free -h | grep Swap| cut -c 27-32)
+SwapUsed=$(free -h | grep Swap| cut -c 39-46)
+echo "SWAP USAGE:
+
+Total Swap:           |$SwapTotal
+Avilaible Swap:       |$SwapFree
+Swap Used:            |$SwapUsed
+
+---------------------------------------------------------------------"
+
+echo "Most Memory Consuming Processes
+
+Root:	 PID:	 CPU:  Mem:
+$(ps aux | sort -k4 -nr | head -6 | cut -c 1-27)
+
+---------------------------------------------------------------------"
+
