@@ -10,6 +10,5 @@ This command is useful as it allows user to see the main overview of their syste
 slow your system down or can help the user see the system performance and resource usage.
 
 #How you can use this command
-./health_check
 
-
+"./health_check" or "sh health_check > system.logs &" and use "vim system.logs" to see past history 
