@@ -1,5 +1,6 @@
 #!/bin/bash
-
+while true; do
+        sleep 43200
 echo "	
 ---------------------------------------------------------------------
 	PC/Laptop Health Check for $(whoami) 
@@ -40,4 +41,4 @@ Root:	 PID:	 CPU:  Mem:
 $(ps aux | sort -k4 -nr | head -6 | cut -c 1-27)
 
 ---------------------------------------------------------------------"
-
+done
