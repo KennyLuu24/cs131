@@ -1,0 +1,70 @@
+!pip3 install -U ucimlrepo
+from ucimlrepo import fetch_ucirepo
+import pandas as pd
+import numpy as np
+import seaborn as sns
+from sklearn.metrics import r2_score, mean_squared_error
+from sklearn.linear_model import LinearRegression
+from sklearn import preprocessing
+import matplotlib.pyplot as plt
+from sklearn.preprocessing import StandardScaler
+
+#Question 1
+df = pd.read_csv('/content/winequality-white.csv', delimiter = ";")
+df.describe()
+
+#Question 2
+correlation_matrix = df.corr()
+plt.figure(figsize=(12, 8))
+sns.heatmap(correlation_matrix, annot=True, vmin=-1, vmax=1)
+plt.title('Correlation Matrix of Features and Target')
+plt.show()
+
+#Question 3
+HISTO = df['quality'].plot.hist()
+HISTO.set_xlabel('Quality')
+HISTO.set_title('Wine Quality')
+
+# Question 4
+SS = StandardScaler()
+Scale_df = pd.DataFrame(SS.fit_transform(df), columns=df.columns)
+plt.figure(figsize=(25, 15))  
+sns.violinplot(data=Scale_df, inner="quartile", density_norm="width")
+
+#Question 5
+model = LinearRegression()
+model.fit(df[['alcohol']], df['quality'])
+fitted = model.predict(df[['alcohol']])
+RMSE = np.sqrt(mean_squared_error(df['quality'], fitted))
+r2 = r2_score(df['quality'], fitted)
+print(f'Intercept = {model.intercept_} \nCoefficient = {model.coef_[0]} \nRMSE = {RMSE} \nR^2 = {r2}')
+
+#Linear Regression for Question 5
+plt.figure(figsize=(25, 10))
+plt.scatter(df['alcohol'], df['quality'], label='Data Point')
+plt.plot(df['alcohol'], fittedline, color='green', label='Regression Line')
+plt.xlabel('Alcohol')
+plt.ylabel('Quality')
+plt.title('Quality Vs. Alcohol')
+plt.legend()
+plt.show()
+
+#Question 6
+model = LinearRegression()
+MultiVari = df[['volatile acidity', 'alcohol', 'density']]
+QualiVari = df['quality']
+model.fit(MultiVari, QualiVari)
+MultipleFitted = model.predict(df[['volatile acidity', 'alcohol', 'density']])
+RMSE = np.sqrt(mean_squared_error(QualiVari, MultipleFitted))
+r2 = r2_score(QualiVari, MultipleFitted)
+print(f'Intercept = {model.intercept_} \nCoefficient = {model.coef_[0]} \nRMSE = {RMSE} \nR^2 = {r2}')
+
+#Linear Regression for Question 6
+plt.figure(figsize=(15, 20))
+plt.scatter(QualiVari, MultipleFitted, label='Data Point')
+plt.plot(QualiVari, QualiVari, color='green', label='Regression Line')
+plt.xlabel('Actual Quality')
+plt.ylabel('Predicted Quality')
+plt.title('Actual vs Predicted Quality')
+plt.legend()
+plt.show()
