@@ -1,0 +1,52 @@
+import pandas as pd
+import numpy as np
+import seaborn as sns
+from sklearn.metrics import r2_score, mean_squared_error
+from sklearn.linear_model import LinearRegression
+from sklearn import preprocessing
+import matplotlib.pyplot as plt
+from sklearn.preprocessing import StandardScaler
+
+#Dataset
+data_url = 'https://raw.githubusercontent.com/csbfx/cs22a/main/global_climate.csv'
+climate_df = pd.read_csv(data_url)
+climate_df
+
+#AvgTemperature over 5 year
+groupY_df = climate_df.groupby(['Year'])
+climate_df['5-Year Interval'] = (climate_df['Year'] // 5) * 5
+climate_df = climate_df.drop(columns=['Year'])
+group_5yr_df = climate_df.groupby(['5-Year Interval'])
+group_5yr_df.describe()
+
+#Scatterplot for AvgTemperature over 5 year
+data = {
+    "Year": [1995, 2000, 2005, 2010, 2015, 2020],
+    "Mean": [60.23, 60.48, 60.75, 60.79, 61.69, 54.21]
+}
+df = pd.DataFrame(data)
+plt.figure(figsize=(15, 10))
+plt.scatter(df['Year'], df['Mean'])
+plt.xlabel('Year')
+plt.ylabel('AvgTemperature')
+plt.title('Average Temperature over the Year')
+plt.legend()
+plt.show()
+
+#AvgTemperature By Region
+data_url = 'https://raw.githubusercontent.com/csbfx/cs22a/main/global_climate.csv'
+climate_df = pd.read_csv(data_url)
+climate_df = climate_df.drop(columns=['Year'])
+groupR_df = climate_df.groupby(['Region'])
+groupR_df.describe()
+
+#Violin Plot for AvgTemperature By Region
+data_url = 'https://raw.githubusercontent.com/csbfx/cs22a/main/global_climate.csv'
+climate_df = pd.read_csv(data_url)
+plt.figure(figsize=(18, 8))
+sns.violinplot(x='Region', y='AvgTemperature', data=climate_df, inner="quartile", density_norm="width")
+plt.xlabel('Region')
+plt.ylabel('Average Temperature (°F)')
+plt.title('Distribution of Average Temperatures by Region')
+plt.grid(True)
+plt.show()
